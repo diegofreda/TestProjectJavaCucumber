@@ -17,15 +17,28 @@ public class SearchSteps {
         SearchPage.TypeInSearchBox(character);
     }
 
-    @When("clicks on Submit")
-    public void clickButton(){
-        SearchPage.ClickSearchButton();
+    @When("clicks on {}")
+    public void clickButton(String buttonId){
+        SearchPage.ClickButton(buttonId);
     }
 
     @Then("shows a card which includes the name {}, the real name {}, and current location {}")
     public void CheckCard(String ExpectedValueName,
                           String ExpectedValueRealName,
                           String ExpectedValueCurrentLocation) {
+        
         SearchPage.CheckCardValues(ExpectedValueName,ExpectedValueRealName,ExpectedValueCurrentLocation);
     };
+
+
+    @When("enter a valid data: {}, {}, {}, {}, {}")
+    public void AddItems(
+            String THUMBNAIL,
+            String NAME,
+            String REALNAME,
+            String LOCATION,
+            String ALIVE
+            ) {
+        SearchPage.addItemsValues(THUMBNAIL, NAME, REALNAME, LOCATION, ALIVE);
+    }
 }

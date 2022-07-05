@@ -28,6 +28,7 @@ public class BasePage {
     //Inputs a value in the received object
     public static void inputCharacters(WebElement inputBox, String characters){
         inputBox.click();
+        inputBox.clear();
         inputBox.sendKeys(characters);
     }
     //Clicks button, receives the object webElement
