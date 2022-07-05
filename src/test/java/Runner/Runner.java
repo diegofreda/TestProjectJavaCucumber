@@ -1,5 +1,6 @@
 package Runner;
 
+import Pages.BasePage;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.AfterClass;
@@ -15,5 +16,8 @@ import org.junit.runner.RunWith;
         dryRun = false
 )
 public class Runner {
-
+    @AfterClass
+    public static void afterAll() {
+       BasePage.closeDriver();
+    }
 }

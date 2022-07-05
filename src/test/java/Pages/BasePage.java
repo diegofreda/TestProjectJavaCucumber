@@ -1,5 +1,6 @@
 package Pages;
 
+import org.junit.AfterClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -34,5 +35,8 @@ public class BasePage {
     //Clicks button, receives the object webElement
     public static void clickButton(WebElement button){
         button.click();
+    }
+    public static void closeDriver(){
+        driver.close();
     }
 }
