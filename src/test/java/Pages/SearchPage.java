@@ -13,19 +13,21 @@ import java.util.concurrent.TimeUnit;
 
 public class SearchPage extends BasePage{
 
-    static String inputBoxLocator = "//body/div[@id='root']/div[1]/div[1]/main[1]/section[1]/form[1]/div[1]/input[1]";
-    static String searchButtonLocator = "/html[1]/body[1]/div[1]/div[1]/div[1]/main[1]/section[1]/form[1]/button[1]";
-    static String addItemButtonLocator = "/html[1]/body[1]/div[1]/div[1]/div[1]/header[1]/button[1]";
-    static String submitItemButtonLocator = "/html[1]/body[1]/div[2]/div[1]/div[1]/div[2]/section[1]/form[1]/div[6]/button[1]";
-    static String FirstCardLocator = "//*[@id=\"root\"]/div/div[1]/main/div/div/div";
+    static String inputBoxLocator = "div.restool-app div.app-page:nth-child(2) main.app-page-content section.query-params-form form:nth-child(2) div.form-row.row > input:nth-child(2)";
+    static String searchButtonLocator = "div.restool-app div.app-page:nth-child(2) main.app-page-content section.query-params-form form:nth-child(2) > button.button";
+    static String addItemButtonLocator = "div:nth-child(2) div.restool-app div.app-page:nth-child(2) header.app-page-header > button.button.add-item.green:nth-child(2)";
+    static String submitItemButtonLocator = "div.popup.form-popup div.popup-content section:nth-child(2) form:nth-child(1) div.buttons-wrapper.center:nth-child(6) > button.button.green";
+    static String FirstCardLocator = "div.restool-app div.app-page:nth-child(2) main.app-page-content div.infinite-scroll-component__outerdiv div.infinite-scroll-component.cards-wrapper > div.card:nth-child(1)";
 
-    static String thumbnailTextBoxLocator = "//*[@id=\"popup-portal\"]/div/div/div[2]/section/form/div[1]/input";
-    static String nameTextBoxLocator = "//*[@id=\"popup-portal\"]/div/div/div[2]/section/form/div[2]/input";
-    static String realNameTextBoxLocator = "/html[1]/body[1]/div[2]/div[1]/div[1]/div[2]/section[1]/form[1]/div[3]/input[1]";
-    static String locationTextBoxLocator = "//*[@id=\"popup-portal\"]/div/div/div[2]/section/form/div[4]/select";
-    static String aliveTextBoxLocator = "//*[@id=\"popup-portal\"]/div/div/div[2]/section/form/div[5]/input";
+    static String DeleteButtonLocator = "div.restool-app div.app-page:nth-child(2) main.app-page-content div.infinite-scroll-component__outerdiv div.infinite-scroll-component.cards-wrapper div.card div.actions-wrapper:nth-child(7) > button.button:nth-child(4)";
 
+    static String thumbnailTextBoxLocator = "div.popup.form-popup div.popup-content section:nth-child(2) form:nth-child(1) div.form-row.row:nth-child(1) > input:nth-child(2)";
+    static String nameTextBoxLocator = "div.popup.form-popup div.popup-content section:nth-child(2) form:nth-child(1) div.form-row.row:nth-child(2) > input:nth-child(2)";
+    static String realNameTextBoxLocator = "div.popup.form-popup div.popup-content section:nth-child(2) form:nth-child(1) div.form-row.row:nth-child(3) > input:nth-child(2)";
+    static String locationTextBoxLocator = "div.popup.form-popup div.popup-content section:nth-child(2) form:nth-child(1) div.form-row.row:nth-child(4) > select:nth-child(2)";
+    static String aliveTextBoxLocator = "div.popup.form-popup div.popup-content section:nth-child(2) form:nth-child(1) div.form-row.row:nth-child(5) > input:nth-child(2)";
 
+    static String actualValueMsgLocator = "div:nth-child(2) div.restool-app div.app-page:nth-child(2) main.app-page-content > div.app-error";
 
     public SearchPage() {
         super(driver);
@@ -37,12 +39,13 @@ public class SearchPage extends BasePage{
 
     public static void TypeInSearchBox(String character) {
         WebElement inputBox = searchWaitUntil(inputBoxLocator);
+        inputCharacters(inputBox, "");
         inputCharacters(inputBox, character);
     }
 
     public static void ClickButton(String buttonId) {
         WebElement button = null;
-        WebElement FirstCard = searchWaitUntil(FirstCardLocator);
+
         switch(buttonId){
             case "Search Submit":
                 button = searchWaitUntil(searchButtonLocator);
@@ -50,8 +53,11 @@ public class SearchPage extends BasePage{
             case "+Add Item":
                 button = searchWaitUntil(addItemButtonLocator);
                 break;
-            case "Submit Item":searchWaitUntil(submitItemButtonLocator);
+            case "Submit Item":
                 button = searchWaitUntil(submitItemButtonLocator);
+                break;
+            case "Delete button":
+                button = searchWaitUntil(DeleteButtonLocator);
                 break;
 
         }
@@ -80,12 +86,14 @@ public class SearchPage extends BasePage{
 
     }
 
-
+    public static void alertAccept(){
+        driver.switchTo().alert().accept();
+    }
 
     //Asserts ---------------------------------------------------------------------------------
-    static String actualValueNameLocator = "/html/body/div[1]/div/div[1]/main/div/div/div/div[3]/span";
-    static String ActualValueRealNameLocator = "/html/body/div[1]/div/div[1]/main/div/div/div/div[4]/span";
-    static String ActualValueCurrentLocationLocator = "/html/body/div[1]/div/div[1]/main/div/div/div/div[5]/span";
+    static String actualValueNameLocator = "div.restool-app div.app-page:nth-child(2) main.app-page-content div.infinite-scroll-component__outerdiv div.infinite-scroll-component.cards-wrapper div.card:nth-child(1) div.card-row.text:nth-child(3) > span:nth-child(2)";
+    static String ActualValueRealNameLocator = "div.restool-app div.app-page:nth-child(2) main.app-page-content div.infinite-scroll-component__outerdiv div.infinite-scroll-component.cards-wrapper div.card:nth-child(1) div.card-row.text:nth-child(4) > span:nth-child(2)";
+    static String ActualValueCurrentLocationLocator = "div.restool-app div.app-page:nth-child(2) main.app-page-content div.infinite-scroll-component__outerdiv div.infinite-scroll-component.cards-wrapper div.card:nth-child(1) div.card-row.text:nth-child(5) > span:nth-child(2)";
 
     public static void CheckCardValues(String ExpectedValueName,
                                        String ExpectedValueRealName,
@@ -109,12 +117,24 @@ public class SearchPage extends BasePage{
 
     }
 
+    public static void checkMsg(String ExpectedMsg){
+        WebElement actualValueMsg = searchWaitUntil(actualValueMsgLocator);
+        ArrayList<String> exceptionCapture = new ArrayList<>();
+        try
+        {
+            Assert.assertEquals(ExpectedMsg, actualValueMsg.getText());
+        }
+        catch(AssertionError e)
+        {
 
+            exceptionCapture.add(e.getMessage());
+        }
+    }
 
-    //Search webelements by xpath, returns an object
+    //Search webelements by cssLocator, returns an object
     public static WebElement searchWaitUntil(String locator) {
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        WebElement webElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
+        WebElement webElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(locator)));
         return webElement;
     }
 
