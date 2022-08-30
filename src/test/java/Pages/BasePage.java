@@ -1,9 +1,11 @@
 package Pages;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.AfterMethod;
+
 import java.util.concurrent.TimeUnit;
 
 
@@ -13,7 +15,8 @@ public class BasePage {
 
         static{
         ChromeOptions chromeOptions = new ChromeOptions();
-        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/chromedriver_win32/chromedriver.exe");
+//        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/chromedriver_win32/chromedriver.exe");
+            WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver(chromeOptions);
         }
 
@@ -28,10 +31,16 @@ public class BasePage {
     //Inputs a value in the received object
     public static void inputCharacters(WebElement inputBox, String characters){
         inputBox.click();
+        inputBox.clear();
         inputBox.sendKeys(characters);
     }
     //Clicks button, receives the object webElement
     public static void clickButton(WebElement button){
-        button.click();
+            button.click();
     }
+    public static void closeDriver(){
+        driver.close();
+    }
+
+
 }
