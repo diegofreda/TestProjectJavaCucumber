@@ -10,10 +10,10 @@ import java.util.concurrent.TimeUnit;
 
 
 public class BasePage {
-    protected static WebDriver driver;
+    public static WebDriver driver;
     public static WebDriver wait;
 
-        static{
+       static{
         ChromeOptions chromeOptions = new ChromeOptions();
 //        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/chromedriver_win32/chromedriver.exe");
             WebDriverManager.chromedriver().setup();

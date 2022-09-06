@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>CursoSelenium</artifactId>
+    <artifactId>test-project-java-cucumber</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -34,7 +34,15 @@
             <artifactId>cucumber-extentsreport</artifactId>
             <version>3.1.1</version>
         </dependency>
+        <dependency>
 
+            <groupId>org.projectlombok</groupId>
+
+            <artifactId>lombok</artifactId>
+
+            <version>1.18.22</version>
+
+        </dependency>
         <dependency>
             <groupId>com.vimalselvam</groupId>
             <artifactId>cucumber-extentsreport</artifactId>
@@ -94,8 +102,6 @@
             <artifactId>junit-browser-runner</artifactId>
             <version>1.0</version>
         </dependency>
-
-
         <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
         <dependency>
             <groupId>io.cucumber</groupId>
@@ -122,10 +128,21 @@
             <artifactId>webdrivermanager</artifactId>
             <version>5.2.1</version>
         </dependency>
-
-
-
     </dependencies>
-
-
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.0.0-M7</version>
+                    <configuration>
+                        <includes>
+                            <include>**/Runner/Runner.java</include>
+                        </includes>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>
